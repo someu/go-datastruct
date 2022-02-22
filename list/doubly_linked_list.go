@@ -109,3 +109,11 @@ func (list *DoublyLinkedList) Find(element interface{}) (int, *DoublyLinkedNode)
 		index++
 	}
 }
+
+func (list *DoublyLinkedList) Head() *DoublyLinkedNode {
+	return list.head
+}
+
+func (list *DoublyLinkedList) Tail() *DoublyLinkedNode {
+	return list.tail
+}

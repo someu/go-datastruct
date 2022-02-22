@@ -104,3 +104,7 @@ func (list *CycleLinkedList) Find(element interface{}) (int, *CycleLinkedNode) {
 		index++
 	}
 }
+
+func (list *CycleLinkedList) Head() *CycleLinkedNode {
+	return list.head
+}

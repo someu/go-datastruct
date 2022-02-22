@@ -70,6 +70,21 @@ func TestDoublyLinkedList(t *testing.T) {
 			}
 		}
 	}
+
+	head := l.Head()
+	if nA == nil {
+		t.Errorf("head expected to G, but got nil")
+	} else if head.Element != "G" {
+		t.Errorf("head expected to be G, bug got %s", head.Element)
+	}
+
+	tail := l.Tail()
+	if nA == nil {
+		t.Errorf("tail expected to J, but got nil")
+	} else if tail.Element != "J" {
+		t.Errorf("head expected to be J, bug got %s", tail.Element)
+	}
+
 	l.Remove(l.Get(7))
 	l.Remove(l.Get(6))
 	l.Remove(l.Get(5))

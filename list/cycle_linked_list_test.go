@@ -74,6 +74,13 @@ func TestCycleLinkedList(t *testing.T) {
 		}
 	}
 
+	head := l.Head()
+	if nA == nil {
+		t.Errorf("head expected to G, but got nil")
+	} else if head.Element != "G" {
+		t.Errorf("head expected to be G, bug got %s", head.Element)
+	}
+
 	l.Remove(l.Get(4))
 	l.Remove(l.Get(3))
 	l.Remove(l.Get(2))

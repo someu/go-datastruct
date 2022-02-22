@@ -90,3 +90,7 @@ func (list *LinkedList) Find(element interface{}) (int, *LinkedNode) {
 		loc += 1
 	}
 }
+
+func (list *LinkedList) Head() *LinkedNode {
+	return list.head
+}

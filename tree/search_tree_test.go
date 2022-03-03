@@ -11,6 +11,14 @@ func TestSearchTree(t *testing.T) {
 	}
 	st := tree.NewSearchTree(compare)
 
+	if st.FindMin() != nil {
+		t.Errorf("search tree's min expected to be nil, but got %d", st.FindMin().Element)
+	}
+
+	if st.FindMax() != nil {
+		t.Errorf("search tree's max expected to be nil, but got %d", st.FindMax().Element)
+	}
+
 	st.Insert(60)
 	st.Insert(50)
 	st.Delete(60)
@@ -24,6 +32,7 @@ func TestSearchTree(t *testing.T) {
 	st.Insert(55)
 	st.Insert(90)
 	st.Insert(70)
+	st.Insert(85)
 	st.Insert(85)
 
 	if st.FindMax().Element != 90 {
@@ -40,6 +49,12 @@ func TestSearchTree(t *testing.T) {
 	if node10 != nil {
 		t.Errorf("node 10 expected to be nil, but got %d", node10.Element)
 	}
+	node90 := st.Find(90)
+	if node90 == nil {
+		t.Errorf("node 90 expected to be 90, but got nil")
+	} else if node90.Element != 90 {
+		t.Errorf("node 90 expected to be nil, but got %d", node90.Element)
+	}
 
 	t.Logf("Delete 10\r\n" + tree.FormatTree(st))
 	st.Delete(90)
@@ -48,4 +63,8 @@ func TestSearchTree(t *testing.T) {
 	t.Logf("Delete 80\r\n" + tree.FormatTree(st))
 	st.Delete(50)
 	t.Logf("Delete 50\r\n" + tree.FormatTree(st))
+	st.Delete(60)
+	t.Logf("Delete 60\r\n" + tree.FormatTree(st))
+	st.Delete(150)
+	t.Logf("Delete 150\r\n" + tree.FormatTree(st))
 }

@@ -1,19 +1,16 @@
 package tree
 
 type SearchTreeNode struct {
-	Element interface{}
+	Element int
 	Left    *SearchTreeNode
 	Right   *SearchTreeNode
 }
 
-type Compare func(interface{}, interface{}) int
-
 type SearchTree struct {
-	root    *SearchTreeNode
-	compare Compare
+	root *SearchTreeNode
 }
 
-func NewSearchTreeNode(element interface{}) *SearchTreeNode {
+func NewSearchTreeNode(element int) *SearchTreeNode {
 	return &SearchTreeNode{
 		Element: element,
 		Left:    nil,
@@ -21,23 +18,21 @@ func NewSearchTreeNode(element interface{}) *SearchTreeNode {
 	}
 }
 
-func NewSearchTree(compare Compare) *SearchTree {
+func NewSearchTree() *SearchTree {
 	return &SearchTree{
-		root:    nil,
-		compare: compare,
+		root: nil,
 	}
 }
 
-func (tree *SearchTree) Find(element interface{}) *SearchTreeNode {
+func (tree *SearchTree) Find(element int) *SearchTreeNode {
 	node := tree.root
 	for {
 		if node == nil {
 			return nil
 		}
-		compared := tree.compare(element, node.Element)
-		if compared > 0 {
+		if element > node.Element {
 			node = node.Right
-		} else if compared < 0 {
+		} else if element < node.Element {
 			node = node.Left
 		} else {
 			return node
@@ -71,21 +66,20 @@ func (tree *SearchTree) FindMax() *SearchTreeNode {
 	}
 }
 
-func (tree *SearchTree) Insert(element interface{}) {
+func (tree *SearchTree) Insert(element int) {
 	node := tree.root
 	if node == nil {
 		tree.root = NewSearchTreeNode(element)
 		return
 	}
 	for {
-		compared := tree.compare(element, node.Element)
-		if compared > 0 {
+		if element > node.Element {
 			if node.Right == nil {
 				node.Right = NewSearchTreeNode(element)
 				return
 			}
 			node = node.Right
-		} else if compared < 0 {
+		} else if element < node.Element {
 			if node.Left == nil {
 				node.Left = NewSearchTreeNode(element)
 				return
@@ -97,18 +91,17 @@ func (tree *SearchTree) Insert(element interface{}) {
 	}
 }
 
-func (tree *SearchTree) Delete(element interface{}) {
+func (tree *SearchTree) Delete(element int) {
 	node := tree.root
 	var parent *SearchTreeNode
 	for {
 		if node == nil {
 			break
 		}
-		compared := tree.compare(element, node.Element)
-		if compared > 0 {
+		if element > node.Element {
 			parent = node
 			node = node.Right
-		} else if compared < 0 {
+		} else if element < node.Element {
 			parent = node
 			node = node.Left
 		} else {
@@ -119,7 +112,6 @@ func (tree *SearchTree) Delete(element interface{}) {
 		return
 	}
 	if node.Left != nil && node.Right != nil {
-		// 从右子树中取出最小值
 		parent = node
 		minNode := node.Right
 		for minNode.Left != nil {

@@ -6,10 +6,7 @@ import (
 )
 
 func TestSearchTree(t *testing.T) {
-	compare := func(i1, i2 interface{}) int {
-		return i1.(int) - i2.(int)
-	}
-	st := tree.NewSearchTree(compare)
+	st := tree.NewSearchTree()
 
 	if st.FindMin() != nil {
 		t.Errorf("search tree's min expected to be nil, but got %d", st.FindMin().Element)

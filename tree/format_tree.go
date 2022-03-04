@@ -31,7 +31,7 @@ func formatTreeNode(node *SearchTreeNode) [][]string {
 	if node == nil {
 		return levels
 	} else if node.Left == nil && node.Right == nil {
-		levels = append(levels, strings.Split(strconv.Itoa(node.Element.(int)), ""))
+		levels = append(levels, strings.Split(strconv.Itoa(node.Element), ""))
 	} else {
 		left := formatTreeNode(node.Left)
 		right := formatTreeNode(node.Right)
@@ -47,7 +47,7 @@ func formatTreeNode(node *SearchTreeNode) [][]string {
 		}
 		halfWidth := int(math.Max(float64(rightWidth), float64(leftWidth)))
 
-		eleArr := strings.Split(strconv.Itoa(node.Element.(int)), "")
+		eleArr := strings.Split(strconv.Itoa(node.Element), "")
 		levels = append(levels, fillBlanks(eleArr, halfWidth*2+2+len(eleArr)))
 
 		level1 := []string{}
